@@ -29,7 +29,7 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 [灵态爆发次数不减]
 [灵态爆发次数上限满]
 [以太加速次数不减]
-[以太加速次数满]
+[以太加速次数上限满]
 [以太加速无冷却]
 [动作限制无敌状态]
 [A技能无冷却]
