@@ -11,6 +11,8 @@ Switch 小小诺娅 乐园继承者 金手指</br>
 TID:0100535014D76000
 BID:8D4FD3BEB5354B02
 ```
+<hr>
+
 ### 代码构架
 https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 还有很多地方可以修改，组合使用的话会有其他效果功能出来
@@ -53,7 +55,6 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 ```
 
 以太加速次数上限最高是2，但是可以通过金手指修改上限位置突破2，同时游戏也会显示很多个以太加速图标
-
 <hr>
 
 ### 全礼物获得修改方法
