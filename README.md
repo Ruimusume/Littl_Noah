@@ -8,7 +8,7 @@ Switch Little Noah: Scion of Paradise Cheats</br>
 Switch 小小诺娅 乐园继承者 金手指</br>
 <img src="https://store-jp.nintendo.com/dw/image/v2/BFGJ_PRD/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw80ea403f/products/D70010000049101/heroBanner/f3c4703b6b8a32a70dd2b7c26b957dd73dec74b7f3e24bdb736dcdd69fe80290.jpg"/>
 ```
-TID:0100535014D76000</br>
+TID:0100535014D76000
 BID:8D4FD3BEB5354B02
 ```
 ### 代码构架
