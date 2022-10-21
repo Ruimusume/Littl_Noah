@@ -50,6 +50,8 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 [传送门碎片999（需整顿顺序后使用）]
 ```
 
+以太加速次数上限最高是2，但是可以通过金手指修改上限位置突破2，同时游戏也会显示很多个以太加速图标
+
 ### 全礼物获得修改方法
 <img src="https://i.imgur.com/hM8gQlk.png"/></br>
 ```
