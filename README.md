@@ -19,6 +19,7 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 
 ```
 [HP锁定999不减]
+[无敌闪烁]
 [玛纳锁定99999]
 [金币锁定9999]
 [钥匙锁定20]
@@ -28,10 +29,10 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 [攻击立刻获得灵态爆发]
 [灵态爆发次数不减]
 [灵态爆发次数上限满]
+[无视条件直接发动灵态爆发]
 [以太加速次数不减]
 [以太加速次数上限满]
 [以太加速无冷却]
-[动作限制无敌状态]
 [A技能无冷却]
 [X技能无冷却]
 [第一个获得道具改-礼物（铜）]
@@ -52,7 +53,6 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 
 以太加速次数上限最高是2，但是可以通过金手指修改上限位置突破2，同时游戏也会显示很多个以太加速图标
 
-动作限制无敌状态是调用了灵态爆发的动作，激活后移动攻击跳跃都很困难，这个功能可以拿来过HELL模式
 
 ### 全礼物获得修改方法
 <img src="https://i.imgur.com/hM8gQlk.png"/></br>
