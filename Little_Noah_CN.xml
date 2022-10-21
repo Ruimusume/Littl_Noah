@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>104207</ID>
+      <Description>"脚本&amp;修改项"</Description>
+      <Options moHideChildren="1"/>
+      <Color>400080</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>245</ID>
+          <Description>"添加进程 (Ctrl + 数字1) {激活这里将自动加载游戏进程}"</Description>
+          <Options moHideChildren="1" moActivateChildrenAsWell="1"/>
+          <Color>0000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+{$lua}
+OpenProcess("LittleNoah.exe")
+
+if getCEVersion() &lt; 7.4 then showMessage("If you are getting this message means your Cheat Engine software is outdated. Please update to the latest Cheat Engine version! Latest official public release version can be found at https://cheatengine.org/\nYour Cheat Engine Version : "..getCEVersion().."\nLatest Public Cheat Engine Version : 7.4") --[[MainForm.close()]]
+return end
+
+{$asm}
+
+luacall(function cycleFullCompact(sender,force); local state = not(compactmenuitem.Caption == 'Compact View Mode'); if force~=nil then state = not force end; compactmenuitem.Caption = state and 'Compact View Mode' or 'Full view Mode'; getMainForm().Splitter1.Visible = state; getMainForm().Panel4.Visible = state; getMainForm().Panel5.Visible = state; end; function addCompactMenu(); if compactmenualreadyexists then return end; local parent = getMainForm().Menu.Items; compactmenuitem = createMenuItem(parent); parent.add(compactmenuitem); compactmenuitem.Caption = 'Compact View Mode'; compactmenuitem.OnClick = cycleFullCompact; compactmenualreadyexists = 'yes'; end; addCompactMenu(); cycleFullCompact(nil,true))
+
+[DISABLE]
+
+luacall(cycleFullCompact(nil,false))
+
+
+
+
+
+
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>97</Key>
+              </Keys>
+              <ID>0</ID>
+              <ActivateSound TTS="EN">Process Opened With Compacted View Activated</ActivateSound>
+              <DeactivateSound TTS="EN">Process Opened With Compacted View Deactivated</DeactivateSound>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>108295</ID>
+              <Description>"靠近玩家秒杀 (Ctrl + 数字2)"</Description>
+              <Color>FF00FF</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game Executable   : LittleNoah.exe
+// Author            : ndck76
+// Executable Version: 2020.3.25.37248
+// Game Version      : Build.9375627
+// Script Date       : 2022-09-09
+
+[ENABLE]
+
+aobscanmodule(ohk,GameAssembly.dll,66 0F 6E B1 74 04 00 00 0F) // 66??????????????0F92??0F5B
+alloc(newmem,$1000,ohk)
+
+label(code)
+label(return)
+
+newmem:
+  mov [rcx+00000474],0
+
+code:
+  movd xmm6,[rcx+00000474]
+  jmp return
+
+ohk:
+  jmp newmem
+  nop 3
+return:
+registersymbol(ohk)
+
+[DISABLE]
+
+ohk:
+  db 66 0F 6E B1 74 04 00 00
+
+unregistersymbol(ohk)
+dealloc(newmem)
+
+</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>17</Key>
+                    <Key>98</Key>
+                  </Keys>
+                  <ID>0</ID>
+                  <ActivateSound TTS="EN">Player Vicinity Auto Kill Activated</ActivateSound>
+                  <DeactivateSound TTS="EN">Player Vicinity Auto Kill Deactivated</DeactivateSound>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>23</ID>
+              <Description>"技能无冷却 (Ctrl + 数字3)"</Description>
+              <Color>FF0000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game Executable   : LittleNoah.exe
+// Author            : ndck76
+// Executable Version: 2020.3.25.37248
+// Game Version      : Build.9375627
+// Script Date       : 2022-09-09
+
+[ENABLE]
+
+aobscanmodule(cooldown,GameAssembly.dll,F3 41 0F 11 44 D0 30 49 8B 0A) // F3????????????498B??4885??74??3B
+alloc(newmem,$1000,cooldown)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [r8+rdx*8+30],0//float
+  jmp return
+
+cooldown:
+  jmp newmem
+  nop 2
+return:
+registersymbol(cooldown)
+
+[DISABLE]
+
+cooldown:
+  db F3 41 0F 11 44 D0 30
+
+unregistersymbol(cooldown)
+dealloc(newmem)
+
+</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>17</Key>
+                    <Key>99</Key>
+                  </Keys>
+                  <ID>0</ID>
+                  <ActivateSound TTS="EN">Skills No Cooldown Activated</ActivateSound>
+                  <DeactivateSound TTS="EN">Skills No Cooldown Deactivated</DeactivateSound>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>42</ID>
+              <Description>"游戏状态  (Ctrl + 数字4) {进入菜单后退出生效}"</Description>
+              <Options moHideChildren="1"/>
+              <Color>800080</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game Executable   : LittleNoah.exe
+// Author            : ndck76
+// Executable Version: 2020.3.25.37248
+// Game Version      : Build.9375627
+// Script Date       : 2022-09-09
+
+[ENABLE]
+
+aobscanmodule(gold,GameAssembly.dll,66 0F 6E 88 10 02 00 00 48) // 66 0F 6E 88 ** ** 00 00 48 ** ** ** 0F ** ** 45 ** **
+alloc(newmem,$1000,gold)
+
+alloc(data2,8)
+registersymbol(data2)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [data2],rax
+  movd xmm1,[rax+00000210]
+  jmp return
+
+gold:
+  jmp newmem
+  nop 3
+return:
+registersymbol(gold)
+
+[DISABLE]
+
+gold:
+  db 66 0F 6E 88 10 02 00 00
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>17</Key>
+                    <Key>100</Key>
+                  </Keys>
+                  <ID>0</ID>
+                  <ActivateSound TTS="EN">Game Status Activated</ActivateSound>
+                  <DeactivateSound TTS="EN">Game Status Deactivated</DeactivateSound>
+                </Hotkey>
+              </Hotkeys>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>44</ID>
+                  <Description>"金币"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data2</Address>
+                  <Offsets>
+                    <Offset>210</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108426</ID>
+                  <Description>"药瓶数量"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data2</Address>
+                  <Offsets>
+                    <Offset>218</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108427</ID>
+                  <Description>"药瓶数量上限"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data2</Address>
+                  <Offsets>
+                    <Offset>21C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108297</ID>
+                  <Description>"玛纳"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data2</Address>
+                  <Offsets>
+                    <Offset>EC</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108308</ID>
+                  <Description>"钥匙"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data2</Address>
+                  <Offsets>
+                    <Offset>214</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108299</ID>
+                  <Description>"总战力"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data2</Address>
+                  <Offsets>
+                    <Offset>20C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108527</ID>
+                  <Description>"无敌闪烁"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:关闭
+1064793998:开启
+</DropDownList>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F800</Address>
+                  <Offsets>
+                    <Offset>180</Offset>
+                    <Offset>138</Offset>
+                    <Offset>138</Offset>
+                    <Offset>AB8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108586</ID>
+                  <Description>"奖励关卡破坏次数"</Description>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+018E3910</Address>
+                  <Offsets>
+                    <Offset>120</Offset>
+                    <Offset>10</Offset>
+                    <Offset>B8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>24</ID>
+                  <Description>"Loaded"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:是/解锁/有效
+0:否/锁定/无效
+</DropDownList>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>data2</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>108529</ID>
+              <Description>"物品修改 {礼物&amp;传送门碎片}，{浏览内存域，复制data文件内存数据覆盖}"</Description>
+              <Options moHideChildren="1"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>108345</ID>
+                  <Description>"物品初始地址"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:无
+30787924114026545:铜
+30787924114026546:‬铁
+30787924114026547:‬银
+30787924114026548:‬紫
+30787924114026549:‬金
+29665314152132661:‬碎片
+</DropDownList>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F800</Address>
+                  <Offsets>
+                    <Offset>28</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>60</Offset>
+                    <Offset>F08</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108530</ID>
+                  <Description>"物品1"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F800</Address>
+                  <Offsets>
+                    <Offset>50</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>60</Offset>
+                    <Offset>F08</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108343</ID>
+                  <Description>"物品2"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F800</Address>
+                  <Offsets>
+                    <Offset>88</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>60</Offset>
+                    <Offset>F08</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108342</ID>
+                  <Description>"物品3"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F800</Address>
+                  <Offsets>
+                    <Offset>C0</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>60</Offset>
+                    <Offset>F08</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108384</ID>
+                  <Description>"物品4"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F800</Address>
+                  <Offsets>
+                    <Offset>F8</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>60</Offset>
+                    <Offset>F08</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108344</ID>
+                  <Description>"物品5"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F800</Address>
+                  <Offsets>
+                    <Offset>130</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>60</Offset>
+                    <Offset>F08</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108528</ID>
+                  <Description>"物品6"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F800</Address>
+                  <Offsets>
+                    <Offset>168</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>60</Offset>
+                    <Offset>F08</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>61</ID>
+              <Description>"Player Character Data (Ctrl + Numpad 5)"</Description>
+              <Options moHideChildren="1"/>
+              <Color>800000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game Executable   : LittleNoah.exe
+// Author            : ndck76
+// Executable Version: 2020.3.25.37248
+// Game Version      : Build.9375627
+// Script Date       : 2022-09-09
+
+[ENABLE]
+
+aobscanmodule(gauge,GameAssembly.dll,F3 ** ** ** ** ** ** ** F3 ** ** ** ** F3 ** ** ** ** F3 ** ** ** ** F3 ** ** ** ** ** ** ** E8 ** ** ** ** 0F ** ** 0F ** **) // should be unique
+alloc(newmem,$1000,gauge)
+alloc(data,8)
+alloc(gaugebkp,5)
+registersymbol(data)
+registersymbol(gauge)
+registersymbol(gaugebkp)
+label(code)
+label(return)
+
+gaugebkp:
+  readmem(gauge,5)
+
+newmem:
+  mov [data],rdi
+
+code:
+  readmem(gauge,5)
+  jmp return
+
+gauge:
+  jmp newmem
+return:
+
+[DISABLE]
+
+gauge:
+  readmem(gaugebkp,5)
+
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>17</Key>
+                    <Key>101</Key>
+                  </Keys>
+                  <ID>0</ID>
+                  <ActivateSound TTS="EN">Player Character Data Activated</ActivateSound>
+                  <DeactivateSound TTS="EN">Player Character Data Deactivated</DeactivateSound>
+                </Hotkey>
+              </Hotkeys>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>108424</ID>
+                  <Description>"连击数"</Description>
+                  <Color>800000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F4D8</Address>
+                  <Offsets>
+                    <Offset>EE0</Offset>
+                    <Offset>A0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108589</ID>
+                  <Description>"总伤害值"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"GameAssembly.dll"+0185F4D8</Address>
+                  <Offsets>
+                    <Offset>EE4</Offset>
+                    <Offset>A0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>62</ID>
+                  <Description>"灵态爆发条"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>data</Address>
+                  <Offsets>
+                    <Offset>54</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>63</ID>
+                  <Description>"灵态爆发上限"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>data</Address>
+                  <Offsets>
+                    <Offset>58</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>64</ID>
+                  <Description>"灵态爆发次数"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data</Address>
+                  <Offsets>
+                    <Offset>5C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>65</ID>
+                  <Description>"灵态爆发次数上限"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data</Address>
+                  <Offsets>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>66</ID>
+                  <Description>"以太加速次数"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data</Address>
+                  <Offsets>
+                    <Offset>64</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>67</ID>
+                  <Description>"以太加速次数上限"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data</Address>
+                  <Offsets>
+                    <Offset>68</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>68</ID>
+                  <Description>"以太加速冷却时间"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>data</Address>
+                  <Offsets>
+                    <Offset>6C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108309</ID>
+                  <Description>"以太加速冷却时间上限"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>data</Address>
+                  <Offsets>
+                    <Offset>70</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>69</ID>
+                  <Description>"灵态爆发状态{1=发动,2=无敌状态,0=未发动}"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>data</Address>
+                  <Offsets>
+                    <Offset>74</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>59</ID>
+                  <Description>"参数"</Description>
+                  <Color>800000</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>16</ID>
+                      <Description>"等级"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>470</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>17</ID>
+                      <Description>"HP"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>474</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8</ID>
+                      <Description>"HP上限"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>240</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>18</ID>
+                      <Description>"玛纳"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>478</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>15</ID>
+                      <Description>"装备力量"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>46C</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>6</ID>
+                      <Description>"基础数值"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>9</ID>
+                      <Description>"总合状态无BUFF"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>34C</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>7</ID>
+                      <Description>"被动状态"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>134</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>10</ID>
+                      <Description>"要素"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>458</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>11</ID>
+                      <Description>"破防类型"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>45C</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>12</ID>
+                      <Description>"破防率"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>460</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>13</ID>
+                      <Description>"重量"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>464</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>14</ID>
+                      <Description>"离开遗迹"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:是/解锁/有效
+0:否/锁定/无效
+</DropDownList>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>468</Offset>
+                        <Offset>28</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108292</ID>
+                  <Description>"Character"</Description>
+                  <Color>800000</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>108279</ID>
+                      <Description>"移动速度"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>5C</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108278</ID>
+                      <Description>"Walk Speed"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>58</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108280</ID>
+                      <Description>"Jump Value"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>60</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108281</ID>
+                      <Description>"Movement Smoothing"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>88</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108282</ID>
+                      <Description>"Idling Wait Time"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>1FC</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108283</ID>
+                      <Description>"Idling Time"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>200</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108284</ID>
+                      <Description>"Idling Wait Time Min"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>204</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108285</ID>
+                      <Description>"Idling Wait Time Max"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>208</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108286</ID>
+                      <Description>"Default Update Speed"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>210</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108287</ID>
+                      <Description>"Update Speed"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>214</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108288</ID>
+                      <Description>"Dynamics Weight"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>248</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108289</ID>
+                      <Description>"Last Dynamics Weight"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>24C</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108290</ID>
+                      <Description>"Shake Deg"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>270</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108291</ID>
+                      <Description>"Shake Power"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>274</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108273</ID>
+                      <Description>"Edge Radius"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>40</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108274</ID>
+                      <Description>"Blob Shadow Radius"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>44</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108275</ID>
+                      <Description>"Blob Shadow Fade"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>48</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108276</ID>
+                      <Description>"Blob Shadow Distance"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>4C</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108277</ID>
+                      <Description>"Wall Walk"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Yes/Unlocked/Enabled
+0:No/Locked/Disabled
+</DropDownList>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>800000</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>data</Address>
+                      <Offsets>
+                        <Offset>54</Offset>
+                        <Offset>20</Offset>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>104176</ID>
+      <Description>"Created By NDCK76 &amp; 露易娘"</Description>
+      <Options moHideChildren="1"/>
+      <Color>008080</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>104177</ID>
+          <Description>"露易娘技术记录"</Description>
+          <Color>0000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://ruisan.blog.jp/')
+{$asm}
+nop
+
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>108531</ID>
+          <Description>"中文加强版发布页"</Description>
+          <Color>0000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://github.com/Ruimusume/Little_Noah')
+{$asm}
+nop
+
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104178</ID>
+          <Description>"My Discord Server"</Description>
+          <Color>FF0000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://discord.gg/XUwSqq9qeH')
+{$asm}
+nop
+
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>108260</ID>
+          <Description>"Table Link Origin"</Description>
+          <Color>FF0080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://fearlessrevolution.com/viewtopic.php?f=4&amp;t=20645')
+{$asm}
+nop
+
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>代码:mov qword ptr [rbx+00000098],FFFFFFFFFFFFFFFF</Description>
+      <AddressString>GameAssembly.dll+519C87</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>89</Byte>
+        <Byte>22</Byte>
+        <Byte>6A</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>C7</Byte>
+        <Byte>83</Byte>
+        <Byte>98</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>45</Byte>
+        <Byte>33</Byte>
+        <Byte>C0</Byte>
+        <Byte>8B</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>代码:mov [rbx+0000009C],edi</Description>
+      <AddressString>GameAssembly.dll+519D39</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>57</Byte>
+        <Byte>CB</Byte>
+        <Byte>FB</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>BB</Byte>
+        <Byte>9C</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>5C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
