@@ -1,4 +1,3 @@
-# 
 # Switch&PC Little Noah v1.04 Cheats
 by 露易娘 Ruimusume</br>
 日站博客：http://ruisan.blog.jp/</br>
@@ -55,7 +54,7 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 
 以太加速次数上限最高是2，但是可以通过金手指修改上限位置突破2，同时游戏也会显示很多个以太加速图标
 
-
+<hr>
 ### 全礼物获得修改方法
 <img src="https://i.imgur.com/hM8gQlk.png"/></br>
 ```
@@ -74,6 +73,6 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 ※传送门碎片在遗迹探索流程中必定会获得，可不用改</br>
 ◎通过上述方法获得全部道具后再使用[全道具顺序整顿（需获得全道具使用）]来排列好内存顺序；</br>
 ◎后续就可以直接用[全礼物数量999（需整顿顺序后使用）]和[传送门碎片999（需整顿顺序后使用）]等；</br>
-
+<hr>
 ### 金手指制作参考支持 PC版CT修改 byndck76
 https://fearlessrevolution.com/viewtopic.php?f=4&t=20645
