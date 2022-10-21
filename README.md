@@ -52,6 +52,8 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 
 以太加速次数上限最高是2，但是可以通过金手指修改上限位置突破2，同时游戏也会显示很多个以太加速图标
 
+动作限制无敌状态是调用了灵态爆发的动作，激活后移动攻击跳跃都很困难，这个功能可以拿来过HELL模式
+
 ### 全礼物获得修改方法
 <img src="https://i.imgur.com/hM8gQlk.png"/></br>
 ```
