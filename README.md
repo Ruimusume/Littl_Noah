@@ -26,6 +26,7 @@ https://github.com/Ruimusume/Little_Noah/blob/main/Little%20Noah.txt</br>
 [药瓶数量锁定4不减]
 [药瓶上限满]
 [连击锁定255]
+[总伤害值初始9999]
 [攻击立刻获得灵态爆发]
 [灵态爆发次数不减]
 [灵态爆发次数上限满]
